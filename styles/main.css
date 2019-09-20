@@ -1,4 +1,52 @@
+/* body and grid */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: crimson;
-  color: whitesmoke;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.grid {
+  height: 100%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, .3);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow:1;
+  max-height: 600px;
+  max-width: 600px;
+}
+.grid div {
+  border: 1px solid lightgrey;
+  flex-grow: 1;
+  height: 10%;
+  width: 10%;
+}
+
+/* player */
+.grid div.player {
+  background-color: coral;
+  background-size: 300px;
+  background-position-x: 0;
+  background-position-y: 0;
+}
+
+/* alien */
+.grid div.alien {
+  background-color: greenyellow;
+  background-size: 300px;
+  background-position-x: 0;
+  background-position-y: 0;
+}
+
+/* bullet */
+.grid div.bullet {
+  border-radius: 50%;
+  background-color: black;
+  background-position-x: 0;
+  background-position-y: 0;
 }
