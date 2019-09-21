@@ -1,17 +1,13 @@
-let playerIndex = 95
-let direction = 1
+// variable names
 const width = 10
 const cells = []
-let alienIndex = 1
+let playerIndex = 95
+let direction = 1
+let alienIndex = 2
+let bulletIndex = playerIndex
+let alienBulletIndex = alienIndex + width
 
-function spaceBar () {
-  const spaceBar = setInterval(() => {
-    console.log('shoot')
-  }, 500)
-  setTimeout(() => {
-    clearInterval(spaceBar)    
-  }, 5000)
-}
+
 function handleUserInput(keyCode) {
   switch (keyCode) {
     case 37: if (playerIndex % width > 0) playerIndex -= 1
@@ -37,11 +33,27 @@ function alienMovement () {
 }
 
 
+function spaceBar () {
+  const bulletMoving = setInterval(() => {
+    cells[bulletIndex].classList.remove('bullet')
+    if (bulletIndex > 10) {
+      bulletIndex -= width
+      cells[bulletIndex].classList.add('bullet')
+    } else {
+      cells[bulletIndex].classList.remove('bullet')
+      clearInterval(bulletMoving)
+    }
+  }, 500)
+}
+
+
+
+
 // Load DOM
 window.addEventListener('DOMContentLoaded', () => {
-
   const grid = document.querySelector('.grid')
   
+
   // grid with cells - added 'cell' to the array 'cells'
   for (let i = 0; i < width ** 2; i++) {
     const cell = document.createElement('div')
@@ -60,21 +72,45 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Set Interval for Alien
   cells[alienIndex].classList.add('alien')
-  setInterval(() => {
+  const alienSetInterval = setInterval(() => {
     cells[alienIndex].classList.remove('alien')    
     alienMovement()
+    // ALIEN REACHES BOTTOM OF SCREEN - YOU LOSE!
+    //change 79 - make flexible for all grid sizes
+    if (alienIndex > 79) {
+      clearInterval(alienSetInterval)
+      console.log('end of game')
+    }
     cells[alienIndex].classList.add('alien')
-  }, 300)
-
-  // // You lose - alien has reached
-  // if (alienIndex === (width ** 2) - 1) {
-  //   alert('You lose!')
-  // }
+  }, 500)
 
 
+  // Player shoots bullets - spacebar
+  document.addEventListener('keyup', (e) => {
+    spaceBar(e.keyCode)
+  })
+
+  // Alien shoots bullets
+  cells[alienBulletIndex].classList.add('alienBullet')
+  const alienBulletMoving = setInterval(() => {
+    cells[alienBulletIndex].classList.remove('alienBullet')
+    if (alienBulletIndex < 89) {
+      alienBulletIndex += width
+      cells[alienBulletIndex].classList.add('alienBullet')
+    } else {
+      cells[alienBulletIndex].classList.remove('alienBullet')
+      clearInterval(alienBulletMoving)
+    }
+  }, 500)
   
 
+  // ALIEN SHOOTS PLAYER - YOU LOSE!
+  function collision () {
+    if (alienBulletIndex === playerIndex) {
+      console.log('collision')
+    }
+  }
 
-
+  collision()
 
 })

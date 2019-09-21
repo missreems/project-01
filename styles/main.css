@@ -29,10 +29,11 @@ body {
 
 /* player */
 .grid div.player {
-  background-color: coral;
+  background-image: url("../assets/sprite-sheet.png") ;
   background-size: 300px;
-  background-position-x: 0;
-  background-position-y: 0;
+  background-position-x: 0px;
+  background-position-y: 0px;
+  
 }
 
 /* alien */
@@ -43,10 +44,18 @@ body {
   background-position-y: 0;
 }
 
-/* bullet */
+/* player bullet */
 .grid div.bullet {
   border-radius: 50%;
-  background-color: black;
+  background-color: orangered;
+  background-position-x: 0;
+  background-position-y: 0;
+}
+
+/* alien bullet */
+.grid div.alienBullet {
+  border-radius: 50%;
+  background-color: green;
   background-position-x: 0;
   background-position-y: 0;
 }
