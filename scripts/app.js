@@ -1,26 +1,26 @@
-// variable names
+// VARIABLE NAMES------------------------------------------------------------
 const width = 10
 const cells = []
-let playerIndex = 95
+let playerIdx = 95
 let direction = 1
-let alienIndex = 2
-let bulletIndex = playerIndex
-let alienBulletIndex = alienIndex + width
+let alienIdx = 2
+let playerBullet = playerIdx - width
+let alienBullet = alienIdx + width
 
 
 function handleUserInput(keyCode) {
   switch (keyCode) {
-    case 37: if (playerIndex % width > 0) playerIndex -= 1
+    case 37: if (playerIdx % width > 0) playerIdx -= 1
       break
-    case 39: if (Math.floor(playerIndex % width < width - 1)) playerIndex += 1
+    case 39: if (Math.floor(playerIdx % width < width - 1)) playerIdx += 1
       break
     case 32: spaceBar()
-      break    
+      break
   }
 }
-function alienMovement () {
-  alienIndex += direction
-  const x = Math.floor(alienIndex % width)
+function alienMovement() {
+  alienIdx += direction
+  const x = Math.floor(alienIdx % width)
   if (direction === 1 && x === width - 1) {
     direction = width
   } else if (direction === width && x === width - 1) {
@@ -31,86 +31,98 @@ function alienMovement () {
     direction = 1
   }
 }
-
-
-function spaceBar () {
+function spaceBar() {
+  cells[playerBullet].classList.add('bullet')
   const bulletMoving = setInterval(() => {
-    cells[bulletIndex].classList.remove('bullet')
-    if (bulletIndex > 10) {
-      bulletIndex -= width
-      cells[bulletIndex].classList.add('bullet')
+    cells[playerBullet].classList.remove('bullet')
+    if (playerBullet > 10) {
+      // console.log(playerIdx)
+      console.log(playerBullet)
+      playerBullet -= width
+      collision()
+      cells[playerBullet].classList.add('bullet')
     } else {
-      cells[bulletIndex].classList.remove('bullet')
+      cells[playerBullet].classList.remove('bullet')
       clearInterval(bulletMoving)
     }
-  }, 500)
+  }, 100)
+  cells[playerBullet].classList.remove('bullet')
+  playerBullet = playerIdx - width
 }
 
+// COLLISION - YOU LOSE!------------------------------------------------------------
+// player shoots alien
+// alien shoots player
+// player's bullet and alien's bullet clashes - should cancel out
+function collision() {
+  if (alienBullet === playerIdx) {
+    console.log('end of game')
+  }
+  if (playerBullet === alienIdx) {
+    cells[alienIdx].style.backgroundColor = 'red'
+  }
+}
 
-
-
-// Load DOM
+// LOAD DOM------------------------------------------------------------
 window.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
-  
 
-  // grid with cells - added 'cell' to the array 'cells'
+
+  // GRID WITH CELLS------------------------------------------------------------
   for (let i = 0; i < width ** 2; i++) {
     const cell = document.createElement('div')
     grid.appendChild(cell)
     cells.push(cell)
   }
 
-  // EventListener for movement of Player - arrow keys
-  cells[playerIndex].classList.add('player')
-  document.addEventListener('keydown', (e) => {
+  // EVENTLISTENER FOR MOVEMENT OF PLAYER------------------------------------------------------------
+  cells[playerIdx].classList.add('player')
+  document.addEventListener('keyup', (e) => {
     // console.log('works')
-    cells[playerIndex].classList.remove('player')
+    cells[playerIdx].classList.remove('player')
     handleUserInput(e.keyCode)
-    cells[playerIndex].classList.add('player')
+    cells[playerIdx].classList.add('player')
   })
 
-  // Set Interval for Alien
-  cells[alienIndex].classList.add('alien')
+  // LINE OF ALIENS------------------------------------------------------------
+
+
+
+
+
+  // ALIEN MOVEMENT PATTERN------------------------------------------------------------
+  cells[alienIdx].classList.add('alien')
   const alienSetInterval = setInterval(() => {
-    cells[alienIndex].classList.remove('alien')    
+    cells[alienIdx].classList.remove('alien')
     alienMovement()
     // ALIEN REACHES BOTTOM OF SCREEN - YOU LOSE!
     //change 79 - make flexible for all grid sizes
-    if (alienIndex > 79) {
+    if (alienIdx > 79) {
       clearInterval(alienSetInterval)
       console.log('end of game')
     }
-    cells[alienIndex].classList.add('alien')
+    cells[alienIdx].classList.add('alien')
   }, 500)
 
 
-  // Player shoots bullets - spacebar
-  document.addEventListener('keyup', (e) => {
-    spaceBar(e.keyCode)
-  })
 
-  // Alien shoots bullets
-  cells[alienBulletIndex].classList.add('alienBullet')
+  // ALIEN SHOOTS A BULLET------------------------------------------------------------
+  // cells[Math.floor(Math.random() * cells.length)] - finds random cell within cells
+  cells[alienBullet].classList.add('alienBullet')
   const alienBulletMoving = setInterval(() => {
-    cells[alienBulletIndex].classList.remove('alienBullet')
-    if (alienBulletIndex < 89) {
-      alienBulletIndex += width
-      cells[alienBulletIndex].classList.add('alienBullet')
+    cells[alienBullet].classList.remove('alienBullet')
+    if (alienBullet < 89) {
+      alienBullet += width
+      collision()
+      cells[alienBullet].classList.add('alienBullet')
     } else {
-      cells[alienBulletIndex].classList.remove('alienBullet')
+      cells[alienBullet].classList.remove('alienBullet')
       clearInterval(alienBulletMoving)
     }
   }, 500)
+
+  
   
 
-  // ALIEN SHOOTS PLAYER - YOU LOSE!
-  function collision () {
-    if (alienBulletIndex === playerIndex) {
-      console.log('collision')
-    }
-  }
-
-  collision()
 
 })
