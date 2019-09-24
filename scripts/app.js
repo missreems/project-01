@@ -1,15 +1,15 @@
 // VARIABLE NAMES------------------------------------------------------------
 const width = 10
 const cells = []
-let playerIdx = 95
 let direction = 1
-// let alienIdx = 2
-const aliens = [1, 3, 5]
-let playerBullet = playerIdx - width
 
-const alienBullet = aliens.forEach(alien => {
-  alien + width
-}) 
+let playerIdx = 95
+const aliens = [1, 3, 5, 7]
+let playerBullet = playerIdx - width
+// const alienBullets = aliens.map(alien => {
+//   alien + width
+//   // console.log(alien + width)
+// }) 
 
 
 function handleUserInput(keyCode) {
@@ -26,18 +26,20 @@ function handleUserInput(keyCode) {
 
 function alienMovement() {
   aliens.forEach(alien => {
-    // console.log(alien)
+    
     alien += direction
+  
     const x = Math.floor(alien % width)
-    if (direction === 1 && x === width - 1) {
-      direction = width
+
+    if (direction === 1) {
+      direction = 1
     } else if (direction === width && x === width - 1) {
       direction = -1
     } else if (direction === -1 && x === 0) {
       direction = width
     } else if (direction === width && x === 0) {
       direction = 1
-    }
+    } 
   })
   
 }
@@ -65,9 +67,11 @@ function spaceBar() {
 // alien shoots player
 // player's bullet and alien's bullet clashes - should cancel out
 function collision() {
-  if (alienBullet === playerIdx) {
-    console.log('end of game')
-  }
+  // aliens.forEach(alien => {
+  //   if (alien[alienBullet] === playerIdx) {
+  //     console.log('end of game')
+  //   }
+  // })
   aliens.forEach(alien => {
     if (playerBullet === alien) {
       console.log('alien shot')
@@ -119,18 +123,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   // ALIEN SHOOTS A BULLET------------------------------------------------------------
-  // cells[Math.floor(Math.random() * cells.length)] - finds random cell within cells
-  // cells[alienBullet].classList.add('alienBullet')
-  // const alienBulletMoving = setInterval(() => {
-  //   cells[alienBullet].classList.remove('alienBullet')
-  //   if (alienBullet < 89) {
-  //     alienBullet += width
-  //     collision()
-  //     cells[alienBullet].classList.add('alienBullet')
-  //   } else {
-  //     cells[alienBullet].classList.remove('alienBullet')
-  //     clearInterval(alienBulletMoving)
-  //   }
-  // }, 500)
-
+  aliens.forEach(alienBullet => {
+    // cells[Math.floor(Math.random() * cells.length)] - finds random cell within cells
+    cells[alienBullet].classList.add('alienBullet')
+    const alienBulletMoving = setInterval(() => {
+      cells[alienBullet].classList.remove('alienBullet')
+      if (alienBullet < 89) {
+        console.log(alienBullet)
+        alienBullet += width
+        collision()
+        cells[alienBullet].classList.add('alienBullet')
+      } else {
+        cells[alienBullet].classList.remove('alienBullet')
+        clearInterval(alienBulletMoving)
+      }
+    }, 500)
+  }) 
 })
