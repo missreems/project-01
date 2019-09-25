@@ -1,6 +1,6 @@
 // VARIABLE NAMES------------------------------------------------------------
 const width = 10
-const cells = []
+let cells = []
 
 let playerIdx = 95
 let playerBullet = playerIdx - width
@@ -25,44 +25,23 @@ function spaceBar() {
   cells[playerBullet].classList.add('bullet')
   const bulletMoving = setInterval(() => {
     cells[playerBullet].classList.remove('bullet')
+    console.log(aliens1)
+    console.log(playerBullet)
+    console.log(aliens1.includes(playerBullet))
     if (playerBullet > 10) {
       // console.log(playerIdx)
-      console.log(playerBullet)
+      // console.log(playerBullet)
       playerBullet -= width
-      collision()
       cells[playerBullet].classList.add('bullet')
     } else {
       cells[playerBullet].classList.remove('bullet')
       clearInterval(bulletMoving)
     }
-  }, 100)
+  }, 300)
   cells[playerBullet].classList.remove('bullet')
   playerBullet = playerIdx - width
 }
-
-// COLLISION - YOU LOSE!------------------------------------------------------------
-// player shoots alien
-function collision() {
-  // ALIENS 1
-  // if (cells.classList.includes(alien) && cells.classList.includes(bullet)) {
-  //   console.log('shot alien1')
-  // }
-  aliens1.forEach(alien => {
-    if (playerBullet === alien) {
-      console.log('alien 1 shot')
-    }
-  })
-
-  // ALIENS 2
-  aliens2.forEach(alien => {
-    if (playerBullet === alien) {
-      console.log('alien 2 shot')
-    }
-  })
-}
-
-
-  
+ 
 
 
 // LOAD DOM------------------------------------------------------------
@@ -98,44 +77,106 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-  aliens1.forEach((alien, i) => {
-    cells[alien].classList.add('alien')
-
-    const aliens1Moving = setInterval(() => {
-      cells[alien].classList.remove('alien')
-      alien += 1
+  // aliens1.forEach((alien, i) => {
+  //   cells[alien].classList.add('alien')
+  //   const aliens1Moving = setInterval(() => {
+  //     cells[alien].classList.remove('alien')
+  //     alien += 1
       
+  //     if (i === 4) {
+  //       checkFour(alien)
+  //     }
+
+  //     if (alien >= 80) {
+  //       clearInterval(aliens1Moving)
+  //       console.log('end of game')
+  //       grid.style.backgroundColor = 'grey'
+  //     }
+
+  //     if (alien === playerBullet) {
+  //       cells[alien].classList.remove('alien')
+  //       cells[alien].classList.remove('bullet')
+  //       console.log('alien shot')
+  //       console.log(alien)
+  //     }
+    
+  //     cells[alien].classList.add('alien')
+  //   }, 300)
+
+    
+  // })
+
+  const aliens1Moving = () => {
+    cells.forEach(cell => cell.classList.remove('alien'))
+    aliens1.forEach((alien, i) => {
+      // alien += 1
       if (i === 4) {
         checkFour(alien)
       }
-
-      if (alien > 79) {
+      if (alien >= 80) {
         clearInterval(aliens1Moving)
         console.log('end of game')
+        grid.style.backgroundColor = 'grey'
       }
+      // console.log(alien)
+      // if (alien === playerBullet) {
+      //   cells[alien].classList.remove('alien')
+      //   cells[alien].classList.remove('bullet')
+      //   console.log('alien shot')
+      // }
+    
       cells[alien].classList.add('alien')
-    }, 300)
-  })
+    })
+    aliens1 = aliens1.map(alien => alien + 1)
+  }
+
+  // const aliens1Moving = setInterval(aliensMoving)
+
+
 
   
 
   // ALIENS 2
   function moveSecondWave() {
-    aliens2.forEach(alien => {
-      cells[alien].classList.add('alien')
-  
-      const aliens2Moving = setInterval(() => {
-        cells[alien].classList.remove('alien')
-        alien += 1
-  
-        // ALIEN REACHES BOTTOM OF SCREEN - YOU LOSE!
-        if (alien > 79) {
-          clearInterval(aliens2Moving)
+    const aliens2Moving = () => {
+      cells.forEach(cell => cell.classList.remove('alien'))
+      aliens1.forEach((alien, i) => {
+      
+        if (alien >= 80) {
+          clearInterval(aliens1Moving)
           console.log('end of game')
+          grid.style.backgroundColor = 'grey'
         }
+      
         cells[alien].classList.add('alien')
-      }, 300)
-    })
+      })
+      aliens2 = aliens2.map(alien => alien + 1)
+    }
+  
+    
+    // aliens2.forEach(alien => {
+    //   cells[alien].classList.add('alien')
+  
+    //   const aliens2Moving = setInterval(() => {
+    //     cells[alien].classList.remove('alien')
+    //     alien += 1
+  
+    //     if (alien >= 80) {
+    //       clearInterval(aliens2Moving)
+    //       console.log('end of game')
+    //       grid.style.backgroundColor = 'grey'
+    //     }
+
+    //     if (alien === playerBullet) {
+    //       cells[alien].classList.remove('alien')
+    //       cells[alien].classList.remove('bullet')
+    //       console.log('alien shot')
+    //       console.log(alien)
+    //     }
+
+    //     cells[alien].classList.add('alien')
+    //   }, 300)
+    // })
   }
   
 })
