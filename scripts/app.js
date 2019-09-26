@@ -23,57 +23,82 @@ function handleUserInput(keyCode) {
       break
   }
 }
-
 function spaceBar() {
-  
+  cells[playerBullet].classList.add('bullet')
+
   const bulletMoving = setInterval(() => {
     cells[playerBullet].classList.remove('bullet')
-    if (cells[playerBullet].classList.contains('alien')) {
-      aliens1 = aliens1.map(alien => {
-        if (!alien) return null
-        
-        console.log(playerBullet, 'bullet')
-        console.log(alien, 'alien')
-
-        if (playerBullet + 1 === alien) {
-          
-          
-          console.log(cells[playerBullet - width].classList)
-          cells[playerBullet - width].classList[0] = ''
-          console.log(cells[playerBullet - width].classList)
-          
-          clearInterval(bulletMoving)
-          //  Code from Olly
-          //  if (cells[laserIdx].classList.contains(‘alien’)) {
-          //   cells[laserIdx].classList.remove(‘alien’, ‘laser’)
-        
-          // cells[playerBullet].classList.remove('bullet')
-          // clearInterval(bulletMoving)
-          return null
-        }
-        return alien
-      })
-    }
-
     
-
-    if (playerBullet > 10) {
+    if (playerBullet > 10 && !cells[playerBullet].classList.contains('alien')) {
       playerBullet -= width
       cells[playerBullet].classList.add('bullet')
     } else {
-      cells[playerBullet].classList.remove('bullet')
+      aliens1 = aliens1.filter(alien => {
+        return alien !== playerBullet + 1
+      })
+      cells[playerBullet].classList.remove('bullet', 'alien')
+      cells[playerBullet].classList.add('explosion')
+      setTimeout(() => {
+        cells[playerBullet].classList.remove('explosion')
+      }, 300)
       clearInterval(bulletMoving)
     }
-  }, 300)
+  }, 100)
 
   cells[playerBullet].classList.remove('bullet')
   playerBullet = playerIdx - width
 }
+
+
+// function spaceBar() {
+  
+//   const bulletMoving = setInterval(() => {
+//     cells[playerBullet].classList.remove('bullet')
+//     if (cells[playerBullet].classList.contains('alien')) {
+//       aliens1 = aliens1.map(alien => {
+//         if (!alien) return null
+        
+//         console.log(playerBullet, 'bullet')
+//         console.log(alien, 'alien')
+
+//         if (playerBullet + 1 === alien) {
+          
+          
+//           console.log(cells[playerBullet - width].classList)
+//           cells[playerBullet - width].classList[0] = ''
+//           console.log(cells[playerBullet - width].classList)
+          
+//           clearInterval(bulletMoving)
+//           //  Code from Olly
+//           //  if (cells[laserIdx].classList.contains(‘alien’)) {
+//           //   cells[laserIdx].classList.remove(‘alien’, ‘laser’)
+        
+//           // cells[playerBullet].classList.remove('bullet')
+//           // clearInterval(bulletMoving)
+//           return null
+//         }
+//         return alien
+//       })
+//     }
+//     if (playerBullet > 10) {
+//       playerBullet -= width
+//       cells[playerBullet].classList.add('bullet')
+//     } else {
+//       cells[playerBullet].classList.remove('bullet')
+//       clearInterval(bulletMoving)
+//     }
+//   }, 300)
+
+//   cells[playerBullet].classList.remove('bullet')
+//   playerBullet = playerIdx - width
+// }
  
 // WINNING CONDITION ------------------------------------------------------------
-aliens1.every(alien => {
-  if (alien === null) alert('You win!')
-})
+// aliens1.every(alien => {
+//   if (alien === null) alert('You win!')
+// })
+
+if (!aliens1.length) alert('you won')
 
 
 // LOAD DOM------------------------------------------------------------
