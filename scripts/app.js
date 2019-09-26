@@ -1,16 +1,16 @@
 // VARIABLE NAMES------------------------------------------------------------
 const width = 10
-let cells = []
+const cells = []
 
 let playerIdx = 95
 let playerBullet = playerIdx - width
 
 let aliens1 = [4, 13, 15, 22, 26]
-let aliens2 = [0, 11, 2]
+let aliens2 = [1, 12, 3]
 let firstWave = false
 let aliens2Moving
 let aliens1Moving
-
+// let result = document.querySelector('.result')
 
 
 function handleUserInput(keyCode) {
@@ -19,31 +19,45 @@ function handleUserInput(keyCode) {
       break
     case 39: if (Math.floor(playerIdx % width < width - 1)) playerIdx += 1
       break
-    case 32: spaceBar()
+    case 86: spaceBar()
       break
   }
 }
+
 function spaceBar() {
-  cells[playerBullet].classList.add('bullet')
+  
   const bulletMoving = setInterval(() => {
     cells[playerBullet].classList.remove('bullet')
     if (cells[playerBullet].classList.contains('alien')) {
-      console.log('hit')
-      console.log(playerBullet )
       aliens1 = aliens1.map(alien => {
-        console.log(alien)
         if (!alien) return null
+        
+        console.log(playerBullet, 'bullet')
+        console.log(alien, 'alien')
+
         if (playerBullet + 1 === alien) {
+          
+          
+          console.log(cells[playerBullet - width].classList)
+          cells[playerBullet - width].classList[0] = ''
+          console.log(cells[playerBullet - width].classList)
+          
+          clearInterval(bulletMoving)
+          //  Code from Olly
+          //  if (cells[laserIdx].classList.contains(‘alien’)) {
+          //   cells[laserIdx].classList.remove(‘alien’, ‘laser’)
+        
           // cells[playerBullet].classList.remove('bullet')
+          // clearInterval(bulletMoving)
           return null
         }
         return alien
       })
-      console.log(aliens1)
     }
+
+    
+
     if (playerBullet > 10) {
-      // console.log(playerIdx)
-      // console.log(playerBullet)
       playerBullet -= width
       cells[playerBullet].classList.add('bullet')
     } else {
@@ -51,10 +65,15 @@ function spaceBar() {
       clearInterval(bulletMoving)
     }
   }, 300)
+
   cells[playerBullet].classList.remove('bullet')
   playerBullet = playerIdx - width
 }
  
+// WINNING CONDITION ------------------------------------------------------------
+aliens1.every(alien => {
+  if (alien === null) alert('You win!')
+})
 
 
 // LOAD DOM------------------------------------------------------------
@@ -73,123 +92,66 @@ window.addEventListener('DOMContentLoaded', () => {
   // EVENTLISTENER FOR MOVEMENT OF PLAYER------------------------------------------------------------
   cells[playerIdx].classList.add('player')
   document.addEventListener('keyup', (e) => {
-    // console.log('works')
     cells[playerIdx].classList.remove('player')
     handleUserInput(e.keyCode)
     cells[playerIdx].classList.add('player')
   })
 
-  
-  // ALIENS MOVEMENT PATTERN------------------------------------------------------------
-  // ALIENS 1
 
+  // ALIENS 1 MOVEMENT PATTERN------------------------------------------------------------
   function checkFour (alien) {
     if (!firstWave && alien === 70) {
-      console.log('should start second wave now')
       moveSecondWave()
       firstWave = true
     }
   }
-  
-  // aliens1.forEach((alien, i) => {
-  //   cells[alien].classList.add('alien')
-  //   const aliens1Moving = setInterval(() => {
-  //     cells[alien].classList.remove('alien')
-  //     alien += 1
-  //     if (i === 4) {
-  //       checkFour(alien)
-  //     }
-  //     if (alien >= 80) {
-  //       clearInterval(aliens1Moving)
-  //       console.log('end of game')
-  //       grid.style.backgroundColor = 'grey'
-  //     }
-  //     if (alien === playerBullet) {
-  //       cells[alien].classList.remove('alien')
-  //       cells[alien].classList.remove('bullet')
-  //       console.log('alien shot')
-  //       console.log(alien)
-  //     }
-  //     cells[alien].classList.add('alien')
-  //   }, 300)
-  // })
 
   aliens1Moving = setInterval(() => {
-    console.log(aliens1)
     cells.forEach(cell => cell.classList.remove('alien'))
     aliens1.forEach((alien, i) => {
-      // alien += 1
       if (i === 4) {
         checkFour(alien)
       }
-      if (alien >= 80) {
+      if (alien >= 81) {
         clearInterval(aliens1Moving)
         clearInterval(aliens2Moving)
-        console.log('end of game')
-        grid.style.backgroundColor = 'grey'
+        console.log('you lose!')
+        // result.textContent = 'YOU LOSE!'
+        cells.forEach(cell => cell.classList.remove('alien'))
+        cells[playerIdx].classList.remove('player')
       }
-      // console.log(alien)
-      // if (alien === playerBullet) {
-      //   cells[alien].classList.remove('alien')
-      //   cells[alien].classList.remove('bullet')
-      //   console.log('alien shot')
-      // }
       if (alien) {
         cells[alien].classList.add('alien')
       }
-      
     })
     aliens1 = aliens1.map(alien => {
       if (!alien) return null
       return alien + 1
     })
-  }, 300)
+  }, 500)
 
 
-
-  
-
-  // ALIENS 2
+  // ALIENS 2 MOVEMENT PATTERN------------------------------------------------------------
   function moveSecondWave() {
+    cells.forEach(cell => cell.classList.remove('alien'))
     aliens2Moving = setInterval(() => {
       aliens2.forEach((alien) => {
-      
-        if (alien >= 80) {
+        if (alien >= 81) {
           clearInterval(aliens1Moving)
           clearInterval(aliens2Moving)
-          console.log('end of game')
+          console.log('you lose!')
+          // result.textContent = 'YOU LOSE!'
           cells.forEach(cell => cell.classList.remove('alien'))
-          grid.style.backgroundColor = 'grey'
+          cells[playerIdx].classList.remove('player') 
         }
-      
-        cells[alien].classList.add('alien')
+        if (alien) {
+          cells[alien].classList.add('alien')
+        }
       })
       aliens2 = aliens2.map(alien => {
         if (!alien) return null
         return alien + 1
       })
-    }, 300)
-  
-    
-    // aliens2.forEach(alien => {
-    //   cells[alien].classList.add('alien')
-    //   const aliens2Moving = setInterval(() => {
-    //     cells[alien].classList.remove('alien')
-    //     alien += 1
-    //     if (alien >= 80) {
-    //       clearInterval(aliens2Moving)
-    //       console.log('end of game')
-    //       grid.style.backgroundColor = 'grey'
-    //     }
-    //     if (alien === playerBullet) {
-    //       cells[alien].classList.remove('alien')
-    //       cells[alien].classList.remove('bullet')
-    //       console.log('alien shot')
-    //       console.log(alien)
-    //     }
-    //     cells[alien].classList.add('alien')
-    //   }, 300)
-    // })
+    }, 500)
   }
-  
 })
