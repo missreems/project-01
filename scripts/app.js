@@ -5,7 +5,7 @@ const cells = []
 let playerIdx = 95
 let playerBullet = playerIdx - width
 
-let aliens1 = [79]
+let aliens1 = [60]
 // let aliens1 = [4, 13, 15, 22, 26]
 // let aliens2 = [1, 12, 3]
 // let firstWave = false
@@ -23,13 +23,24 @@ let aliens1Moving
 
 // LOAD DOM------------------------------------------------------------
 window.addEventListener('DOMContentLoaded', () => {
+  const welcomePage = document.querySelector('.welcomePage')
+  welcomePage.classList.add('welcomePage')
+  const start = document.querySelector('.startButton')
+
   const grid = document.querySelector('.grid')
+
+  grid.classList.add('hide')
+
   const winningText = document.querySelector('.winning-text')
   winningText.classList.add('hide')
   const losingText = document.querySelector('.losing-text')
   losingText.classList.add('hide')
-  const reset = document.querySelector('.reset')
-  reset.classList.add('hide')
+  
+  const resetButtons = document.querySelectorAll('.reset')
+  const winReset = document.querySelector('.winReset')
+  winReset.classList.add('hide')
+  const loseReset = document.querySelector('.loseReset')
+  loseReset.classList.add('hide')
 
 
   function handleUserInput(keyCode) {
@@ -43,33 +54,44 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // WELCOME PAGE ------------------------------------------------------------
+  start.addEventListener('click', () => {
+    console.log('hello start')
+    
+    // welcomePage.classList.remove('welcomePage')
+    welcomePage.style.display = 'none'
+    grid.classList.remove('hide')
+  })
+  // after loading, a couple of minutes later the lose page comes up!!!
   
   // WINNING CONDITION ------------------------------------------------------------
   function win() {
     if (!aliens1.length) {
-      console.log('you win!')
+      // console.log('you win!')
       grid.classList.replace('grid', 'hide')
       winningText.classList.remove('hide')
       winningText.classList.add('.winning-text')
-      reset.classList.remove('hide')
-      reset.classList.add('.reset')
+      winReset.classList.remove('hide')
+      winReset.classList.add('.winReset')
     }
   }
 
   // LOSING CONDITION ------------------------------------------------------------
   function lose() {
-    console.log('you win!')
+    // console.log('you lose!')
     grid.classList.replace('grid', 'hide')
     losingText.classList.remove('hide')
     losingText.classList.add('.losing-text')
-    reset.classList.remove('hide')
-    reset.classList.add('.reset')
+    loseReset.classList.remove('hide')
+    loseReset.classList.add('.loseReset')
     
   }
 
   // RESET BUTTON ------------------------------------------------------------
-  reset.addEventListener('click', () => {
-    location.reload()
+  resetButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      location.reload()
+    })
   })
 
 

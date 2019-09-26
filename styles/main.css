@@ -139,7 +139,7 @@ p:nth-of-type(2) {
   margin: 30px 0;
 }
 
-button {
+.reset, .startButton {
   background-color: black;
   border: 2px solid red;
   color: white;
@@ -147,4 +147,36 @@ button {
   padding: 12px 15px;
   text-transform: uppercase;
   font-family: 'Gugi', cursive;
+  outline-width: 8px;
+}
+
+.winReset {
+  outline-color: red;
+}
+
+.loseReset {
+   outline-color: black;
+}
+
+.welcomePage {
+  max-width: 600px;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+.welcomeImage {
+  background-image: url("../assets/New\ Piskel-1.png\ \(2\).png");
+  height: 300px;
+  width: 420px;
+  background-position: cover;
+  background-repeat: no-repeat;
+}
+
+.startButton {
+  width: 100px;
+  margin-top: 20px;
+  outline-color: red;
 }
