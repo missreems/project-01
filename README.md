@@ -12,7 +12,7 @@ It is my first project whilst studying at General Assembly in the Software Engin
 <!-- Short description about motivation behind the creation and maintenance of the project. -->
 <!-- why this project matters -->
 ## Motivation
-Since this project was my first using a coding language, I decided to create a game that I would enjoy. I wanted to create a game that would have some of the basics of Space Invaders, but also add my own ideas to. The pixel art in Space Invaders really made me want to create a similar version, however I wanted to replace the sci-fi theme of the game and make it work for sprites that looked quite cute!
+Since this is my first project whilst learning to code, I decided to create a game that I would enjoy. I decided to create a game containing some of the basics of Space Invaders, but also add my own ideas to. The pixel art in Space Invaders influenced me want to create a similar game, however I wanted to use a different theme to the classic.
 
 # Table of Contents
 
@@ -26,12 +26,48 @@ Since this project was my first using a coding language, I decided to create a g
 
 ## Screenshots
 <!-- include logo screenshots, demo screenshots -->
-![readme-one](assets/screenshots/)
+<!--ADD IMAGE: ![readme-one](assets/screenshots/welcome-page) -->
 
 ## Tech used
 * HTML
 * CSS5
 * JavaScript
+
+
+## Getting Started
+The game is deployed on GitHub Pages and it can be found here: https://github.com/missreems/project-01
+
+Download the source code of the game using the clone button on the GitHub page. To play the game, open the index.html file in your browser and click 'Start'. If any issues arise, check the console. All images used within the game are PNG files and are stored in the assets folder. There are a range of sprites avaiable if you would like to change your player or jellies.
+
+
+## Game Architecture
+
+Jelly Invaders is a game where the user moves the player and attempts to shoot all the moving jellies on the 10x10 grid before it reaches the bottom. The player can be moved left and right using the left and right arrow keys, and can shoot using the 'V' key.
+
+The game currently has 1 level, consisting of one wave of jellies.
+
+
+
+
+
+The game has two modes which the player can choose from: one player or two players.
+
+![readme-one](images/readme-one.png)
+
+In the **two players mode** the players take turns to drop a Spongebob or a Squidward respectively until one of them manages to place four in a line vertically, horizontally or diagonally.
+
+In the **one player mode** the player plays as Spongebob against the computer (Squidward). The computer reacts to Spongebob's move following these rules:
+
+1) It checks if Spongebob has three in a row (vertical, diagonal or horizontal) and plays on the fourth circle. This for now only works if Spongebob's last move was to place the third circle. There's also an animation that shakes the three Spongebobs in a line to indicate that squidward defended.
+
+The defence priority is horizontal > vertical > diagonal as naturally players will try to place four in a row or a column.
+
+2) If there's no '3 in a line' then it checks for 2s in a line in all directions.
+
+3) If there's no '2 in a line' either then it generates a random number between 0 and 2 and if 0 then places the player on the first available left hand side column. If 1 then places it above and if 2 then on the right.
+
+An example of the function used for column four:
+
 
 ## Features
 <!-- what makes your project stand out? -->
