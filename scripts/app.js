@@ -5,8 +5,7 @@ const cells = []
 let playerIdx = 95
 let playerBullet = playerIdx - width
 
-let aliens1 = [60]
-// let aliens1 = [4, 13, 15, 22, 26]
+let aliens1 = [4, 13, 15, 22, 26, 31, 37, 40, 48]
 // let aliens2 = [1, 12, 3]
 // let firstWave = false
 let aliens2Moving
@@ -57,6 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // WELCOME PAGE ------------------------------------------------------------
   start.addEventListener('click', () => {
     console.log('hello start')
+    aliensStartMoving()
     
     // welcomePage.classList.remove('welcomePage')
     welcomePage.style.display = 'none'
@@ -144,29 +144,32 @@ window.addEventListener('DOMContentLoaded', () => {
   //     firstWave = true
   //   }
   // }
-
-  aliens1Moving = setInterval(() => {
-    cells.forEach(cell => cell.classList.remove('alien'))
-    aliens1.forEach((alien) => {
-      // if (i === 4) {
-      //   checkFour(alien)
-      // }
-      if (alien >= 81) {
-        clearInterval(aliens1Moving)
-        clearInterval(aliens2Moving)
-        lose()
-        cells.forEach(cell => cell.classList.remove('alien'))
-        cells[playerIdx].classList.remove('player')
-      }
-      if (alien) {
-        cells[alien].classList.add('alien')
-      }
-    })
-    aliens1 = aliens1.map(alien => {
-      if (!alien) return null
-      return alien + 1
-    })
-  }, 300)
+  function aliensStartMoving () {
+    aliens1Moving = setInterval(() => {
+      cells.forEach(cell => cell.classList.remove('alien'))
+      aliens1.forEach((alien) => {
+        // if (i === 4) {
+        //   checkFour(alien)
+        // }
+        if (alien >= 81) {
+          clearInterval(aliens1Moving)
+          clearInterval(aliens2Moving)
+          lose()
+          console.log('you lose')
+          cells.forEach(cell => cell.classList.remove('alien'))
+          cells[playerIdx].classList.remove('player')
+        }
+        if (alien) {
+          cells[alien].classList.add('alien')
+        }
+      })
+      aliens1 = aliens1.map(alien => {
+        if (!alien) return null
+        return alien + 1
+      })
+    }, 350)
+  }
+  
 
 
   // ALIENS 2 MOVEMENT PATTERN------------------------------------------------------------
