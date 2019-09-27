@@ -79,7 +79,7 @@ p:nth-of-type(2) {
 }
 
 /* alien */
-.grid div.alien {
+.grid div.jelly {
   background-image: url("../assets/Jelly\ copy.png");
   background-size: 58px;
   background-position: center;
@@ -91,7 +91,7 @@ p:nth-of-type(2) {
 /* player bullet */
 .grid div.bullet {
   border-radius: 50%;
-  background-color: rgb(255, 0, 255);
+  background-color: rgb(255, 0, 0);
   background-position-x: 0;
   background-position-y: 0;
 }
@@ -133,6 +133,12 @@ p:nth-of-type(2) {
 }
 
 .losing-text h2:nth-of-type(2) {
+  font-size: 40px;
+  color: rgb(255, 0, 0);
+  margin-top: 30px;
+}
+
+.losing-text h2:nth-of-type(3) {
   font-size: 30px;
   color: rgb(0, 0, 0);
   text-transform: capitalize;

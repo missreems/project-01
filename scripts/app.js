@@ -5,11 +5,11 @@ const cells = []
 let playerIdx = 95
 let playerBullet = playerIdx - width
 
-let aliens1 = [4, 13, 15, 22, 26, 31, 37, 40, 48]
-// let aliens2 = [1, 12, 3]
+let jellies1 = [4, 13, 15, 22, 26, 31, 37, 40, 48]
+// let jellies2 = [1, 12, 3]
 // let firstWave = false
-let aliens2Moving
-let aliens1Moving
+let jellies2Moving
+let jellies1Moving
 // let result = document.querySelector('.result')
 
 
@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // WELCOME PAGE ------------------------------------------------------------
   start.addEventListener('click', () => {
     console.log('hello start')
-    aliensStartMoving()
+    jelliesStartMoving()
     
     // welcomePage.classList.remove('welcomePage')
     welcomePage.style.display = 'none'
@@ -66,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // WINNING CONDITION ------------------------------------------------------------
   function win() {
-    if (!aliens1.length) {
+    if (!jellies1.length) {
       // console.log('you win!')
       grid.classList.replace('grid', 'hide')
       winningText.classList.remove('hide')
@@ -116,14 +116,14 @@ window.addEventListener('DOMContentLoaded', () => {
     const bulletMoving = setInterval(() => {
       cells[playerBullet].classList.remove('bullet')
   
-      if (playerBullet > 10 && !cells[playerBullet].classList.contains('alien')) {
+      if (playerBullet > 10 && !cells[playerBullet].classList.contains('jelly')) {
         playerBullet -= width
         cells[playerBullet].classList.add('bullet')
       } else {
-        aliens1 = aliens1.filter(alien => {
-          return alien !== playerBullet + 1
+        jellies1 = jellies1.filter(jelly => {
+          return jelly !== playerBullet + 1
         })
-        cells[playerBullet].classList.remove('bullet', 'alien')
+        cells[playerBullet].classList.remove('bullet', 'jelly')
         cells[playerBullet].classList.add('explosion')
         setTimeout(() => {
           cells[playerBullet].classList.remove('explosion')
@@ -137,61 +137,61 @@ window.addEventListener('DOMContentLoaded', () => {
     playerBullet = playerIdx - width
   }
 
-  // ALIENS 1 MOVEMENT PATTERN------------------------------------------------------------
-  // function checkFour (alien) {
-  //   if (!firstWave && alien === 50) {
+  // JELLIES 1 MOVEMENT PATTERN------------------------------------------------------------
+  // function checkFour (jelly) {
+  //   if (!firstWave && jelly === 50) {
   //     moveSecondWave()
   //     firstWave = true
   //   }
   // }
-  function aliensStartMoving () {
-    aliens1Moving = setInterval(() => {
-      cells.forEach(cell => cell.classList.remove('alien'))
-      aliens1.forEach((alien) => {
+  function jelliesStartMoving () {
+    jellies1Moving = setInterval(() => {
+      cells.forEach(cell => cell.classList.remove('jelly'))
+      jellies1.forEach((jelly) => {
         // if (i === 4) {
-        //   checkFour(alien)
+        //   checkFour(jelly)
         // }
-        if (alien >= 81) {
-          clearInterval(aliens1Moving)
-          clearInterval(aliens2Moving)
+        if (jelly >= 81) {
+          clearInterval(jellies1Moving)
+          clearInterval(jellies2Moving)
           lose()
           console.log('you lose')
-          cells.forEach(cell => cell.classList.remove('alien'))
+          cells.forEach(cell => cell.classList.remove('jelly'))
           cells[playerIdx].classList.remove('player')
         }
-        if (alien) {
-          cells[alien].classList.add('alien')
+        if (jelly) {
+          cells[jelly].classList.add('jelly')
         }
       })
-      aliens1 = aliens1.map(alien => {
-        if (!alien) return null
-        return alien + 1
+      jellies1 = jellies1.map(jelly => {
+        if (!jelly) return null
+        return jelly + 1
       })
     }, 350)
   }
   
 
 
-  // ALIENS 2 MOVEMENT PATTERN------------------------------------------------------------
+  // JELLIES 2 MOVEMENT PATTERN------------------------------------------------------------
   // function moveSecondWave() {
-  //   cells.forEach(cell => cell.classList.remove('alien'))
-  //   aliens2Moving = setInterval(() => {
-  //     aliens2.forEach((alien) => {
-  //       if (alien >= 81) {
-  //         clearInterval(aliens1Moving)
-  //         clearInterval(aliens2Moving)
+  //   cells.forEach(cell => cell.classList.remove('jelly'))
+  //   jellies2Moving = setInterval(() => {
+  //     jellies2.forEach((jelly) => {
+  //       if (jelly >= 81) {
+  //         clearInterval(jellies1Moving)
+  //         clearInterval(jellies2Moving)
   //         console.log('you lose!')
   //         // result.textContent = 'YOU LOSE!'
-  //         cells.forEach(cell => cell.classList.remove('alien'))
+  //         cells.forEach(cell => cell.classList.remove('jelly'))
   //         cells[playerIdx].classList.remove('player') 
   //       }
-  //       if (alien) {
-  //         cells[alien].classList.add('alien')
+  //       if (jelly) {
+  //         cells[jelly].classList.add('jelly')
   //       }
   //     })
-  //     aliens2 = aliens2.map(alien => {
-  //       if (!alien) return null
-  //       return alien + 1
+  //     jellies2 = jellies2.map(jelly => {
+  //       if (!jelly) return null
+  //       return jelly + 1
   //     })
   //   }, 500)
   // }
