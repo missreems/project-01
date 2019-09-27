@@ -69,7 +69,7 @@ p:nth-of-type(2) {
 
 /* player */
 .grid div.player {
-  background-image: url("../assets/Jelly\ copy\ 4.png") ;
+  background-image: url("../assets/jelly-evil.png") ;
   background-size: 58px;
   background-position: center;
   background-repeat: no-repeat;
@@ -80,7 +80,7 @@ p:nth-of-type(2) {
 
 /* alien */
 .grid div.jelly {
-  background-image: url("../assets/Jelly\ copy.png");
+  background-image: url("../assets/jelly-blue.png");
   background-size: 58px;
   background-position: center;
   background-repeat: no-repeat;
@@ -98,7 +98,7 @@ p:nth-of-type(2) {
 
 .grid div.explosion {
   border-radius: 50%;
-  background-color: yellow;
+  background-color: rgb(4, 82, 102);
   background-position-x: 0;
   background-position-y: 0;
 }
@@ -175,7 +175,7 @@ p:nth-of-type(2) {
   
 }
 .welcomeImage {
-  background-image: url("../assets/New\ Piskel-1.png\ \(2\).png");
+  background-image: url("../assets/jelly-evil-pixel-art.png");
   height: 300px;
   width: 420px;
   background-position: cover;
