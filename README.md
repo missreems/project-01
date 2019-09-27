@@ -15,14 +15,13 @@ It is my first project whilst studying at General Assembly in the Software Engin
 Since this is my first project whilst learning to code, I decided to create a game that I would enjoy. I decided to create a game containing some of the basics of Space Invaders, but also add my own ideas to. The pixel art in Space Invaders influenced me want to create a similar game, however I wanted to use a different theme to the classic.
 
 # Table of Contents
-
-
-
-
-<!-- Build status buttons -->
-<!-- need more info -->
-
-<!-- Code style buttons -->
+- [Tech Used](##tech-used)
+- [Getting Started](##getting-started)
+- [Game Architecture](##game-architecture)
+- [Features](##features)
+- [Installation](##installation)
+- [Credits](##credits)
+- [License](##license)
 
 ## Screenshots
 <!-- include logo screenshots, demo screenshots -->
@@ -44,29 +43,9 @@ Download the source code of the game using the clone button on the GitHub page. 
 
 Jelly Invaders is a game where the user moves the player and attempts to shoot all the moving jellies on the 10x10 grid before it reaches the bottom. The player can be moved left and right using the left and right arrow keys, and can shoot using the 'V' key.
 
-The game currently has 1 level, consisting of one wave of jellies.
+The game currently has one wave of jellies.
 
-
-
-
-
-The game has two modes which the player can choose from: one player or two players.
-
-![readme-one](images/readme-one.png)
-
-In the **two players mode** the players take turns to drop a Spongebob or a Squidward respectively until one of them manages to place four in a line vertically, horizontally or diagonally.
-
-In the **one player mode** the player plays as Spongebob against the computer (Squidward). The computer reacts to Spongebob's move following these rules:
-
-1) It checks if Spongebob has three in a row (vertical, diagonal or horizontal) and plays on the fourth circle. This for now only works if Spongebob's last move was to place the third circle. There's also an animation that shakes the three Spongebobs in a line to indicate that squidward defended.
-
-The defence priority is horizontal > vertical > diagonal as naturally players will try to place four in a row or a column.
-
-2) If there's no '3 in a line' then it checks for 2s in a line in all directions.
-
-3) If there's no '2 in a line' either then it generates a random number between 0 and 2 and if 0 then places the player on the first available left hand side column. If 1 then places it above and if 2 then on the right.
-
-An example of the function used for column four:
+When the player is shooting, the speed of the shot is slightly faster than the movement of the jellies. However, the speed of the first wave of jellies does keep the user on their toes as the functionality of the arrow keys only allows for the player to move one cell at a time, rather than being pressed down to quickly move across the grid.
 
 
 ## Features
@@ -78,8 +57,6 @@ An example of the function used for column four:
 ## Installation
 <!-- Provide step by step series of examples and explanations about how to get a development env running. -->
 
-## How to use
-<!-- include step by step guide to use your project. -->
 
 ## Credits
 <!-- This could be a link to any repo which inspired you to build this project, any blogposts or links to people who contrbuted in this project. -->
