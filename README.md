@@ -1,31 +1,30 @@
 ![ga_cog_large_red_rgb](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png)
 
-<!-- Project title -->
 # Jelly Invaders
 
-<!-- Small introduction to game in 2/3 sentences. -->
+
 # Intro
 This browser game has been created using a few concepts of the classic Space Invaders.
 It is my first project whilst studying at General Assembly in the Software Engineering Immersive. 
-
-
 <!-- Short description about motivation behind the creation and maintenance of the project. -->
-<!-- why this project matters -->
+
+
 ## Motivation
-Since this is my first project whilst learning to code, I decided to create a game that I would enjoy. I decided to create a game containing some of the basics of Space Invaders, but also add my own ideas to. The pixel art in Space Invaders influenced me want to create a similar game, however I wanted to use a different theme to the classic.
+Since this is my first project whilst learning to code, I decided to create a game that I would enjoy. I decided to create a game containing some of the basics of Space Invaders, but I wanted to add some of my own ideas too. The pixel art in Space Invaders influenced me want to create a similar game, however I wanted to use a different theme to the classic.
+
 
 # Table of Contents
+- [Deployment](##deployment)
 - [Tech Used](##tech-used)
 - [Getting Started](##getting-started)
 - [Game Architecture](##game-architecture)
-- [Features](##features)
-- [Installation](##installation)
-- [Credits](##credits)
-- [License](##license)
+- [Challenges & Future Improvements](##challenges-&-future-improvements)
+- [Creator](##creator)
 
-## Screenshots
-<!-- include logo screenshots, demo screenshots -->
-<!--ADD IMAGE: ![readme-one](assets/screenshots/welcome-page) -->
+
+## Deployment
+The game is deployed on GitHub Pages and it can be found here: https://github.com/missreems/project-01
+
 
 ## Tech used
 * HTML
@@ -34,35 +33,45 @@ Since this is my first project whilst learning to code, I decided to create a ga
 
 
 ## Getting Started
-The game is deployed on GitHub Pages and it can be found here: https://github.com/missreems/project-01
-
 Download the source code of the game using the clone button on the GitHub page. To play the game, open the index.html file in your browser and click 'Start'. If any issues arise, check the console. All images used within the game are PNG files and are stored in the assets folder. There are a range of sprites avaiable if you would like to change your player or jellies.
 
 
 ## Game Architecture
 
-Jelly Invaders is a game where the user moves the player and attempts to shoot all the moving jellies on the 10x10 grid before it reaches the bottom. The player can be moved left and right using the left and right arrow keys, and can shoot using the 'V' key.
+Jelly Invaders is a game where the user moves the player and attempts to shoot all the moving jellies on the 10x10 grid before it reaches the bottom.
+
+![readme-one](assets/screenshots/starting-page.png)
 
 The game currently has one wave of jellies.
 
-When the player is shooting, the speed of the shot is slightly faster than the movement of the jellies. However, the speed of the first wave of jellies does keep the user on their toes as the functionality of the arrow keys only allows for the player to move one cell at a time, rather than being pressed down to quickly move across the grid.
+![readme-one](assets/screenshots/jellies.png)
 
 
-## Features
-<!-- what makes your project stand out? -->
+When the game begins, the computer releases the wave of jellies onto the grid. The jellies move across the grid from left to right, when it reaches the end of each line on the grid the jellies will move from left to right on the next line until they reach the red line indicated on the grid.
 
-## Code Example
-<!-- developers should be able to figure out how your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise. -->
+<!-- screenshot of red line -->
 
-## Installation
-<!-- Provide step by step series of examples and explanations about how to get a development env running. -->
+The player's sprite is at the bottom of the grid, it is allowed to move left and right via the arrow keys, one cell at a time. The player can shoot the jellies via the 'V' key and releases a bullet only one at a time. The jellies move slighlty slower than the speed of the bullet.
+
+After every bullet is shot by the player, the game checks for a 'win' by verifying if any jellies are left. If the result 'false' is returned from the length of the array of jellies, the player wins.
+
+The game can be won by shooting all the jellies on the grid, else the screen will show the sign 'Game Over' if any jelly reaches the red line.
+
+![readme-one](assets/screenshots/winning-page.png) ![readme-one](assets/screenshots/losing-page.png)
+
+An example of the function...used for ... :
+<!-- screenshot of code for the function chosen to show -->
 
 
-## Credits
-<!-- This could be a link to any repo which inspired you to build this project, any blogposts or links to people who contrbuted in this project. -->
+## Challenges & Future Improvements
+The main challenge of this project was creating the game logic for each feature. Each feature introduced in the game allowed me to understand a little bit more about how to piece together code to produce a fully-working feature in the game. Also, connecting features together so they all worked well together was quite challenging.
 
-## License
-<!-- A short snippet describing the license (MIT, Apache etc) -->
-<!-- MIT © Yourname -->
+<!-- what was difficult specifically and what strategy was used to overcome this -->
+<!-- EXAMPLE - This strategy was effective as it allowed to easily debug which columns were being played on correctly or not. However, the code is quite long and it makes Squidward's move reliant on Spongebob's last one rather then looking at the whole game so far.-->
 
-<!-- details to help a new user get started: 1. how to install and start the game -->
+In the future, I hope to refactor my key functions so the game works smoothly. I'd like to give the jellies the functionality of shooting at the player and adding an additional condition for losing the game.
+
+
+## Creator
+Reema Patel
+<!--  - Link to first project here: website link  -->

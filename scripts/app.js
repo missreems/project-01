@@ -151,6 +151,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // if (i === 4) {
         //   checkFour(jelly)
         // }
+        console.log(jelly)
         if (jelly >= 81) {
           clearInterval(jellies1Moving)
           clearInterval(jellies2Moving)
@@ -166,6 +167,7 @@ window.addEventListener('DOMContentLoaded', () => {
       jellies1 = jellies1.map(jelly => {
         if (!jelly) return null
         return jelly + 1
+        
       })
     }, 350)
   }

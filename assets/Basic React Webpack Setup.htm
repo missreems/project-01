@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://localhost:8000/movies/475557 -->
+<html lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Basic React Webpack Setup</title>
+  <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap);</style><style type="text/css">@import url(https://fonts.googleapis.com/css?family=Graduate&display=swap);</style><style type="text/css">* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Graduate', cursive; }
+
+main {
+  min-height: 100vh;
+  display: flex; }
+
+.sidebar-wrapper {
+  height: 100vh; }
+
+.sidebar {
+  flex-grow: 1;
+  max-width: 30%;
+  background-color: black;
+  color: white; }
+
+.content-wrapper {
+  flex-grow: 1;
+  max-width: 70%;
+  height: 100%; }
+
+.content {
+  background-color: #f1f1f1;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  padding-top: 30px; }
+  .content .movieCard {
+    margin: 0 auto; }
+    .content .movieCard a {
+      width: 100%;
+      height: 100%; }
+      .content .movieCard a .image-div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 15px 0; }
+        .content .movieCard a .image-div img {
+          border: 1px solid white;
+          box-shadow: 0 0 10px 8px #7a7a7a;
+          height: 100%;
+          width: auto; }
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 25px;
+  height: 80%; }
+  .filters h2 {
+    font-size: 60px;
+    text-align: center;
+    font-family: "Bungee Inline", cursive; }
+  .filters .rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; }
+    .filters .rating label {
+      margin-right: 30px;
+      width: 90px;
+      text-align: center; }
+    .filters .rating input {
+      width: 50px;
+      height: 50px;
+      font-size: 30px;
+      text-align: center;
+      border-radius: 10px; }
+  .filters .radio {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; }
+    .filters .radio div {
+      display: flex;
+      align-items: center;
+      margin: 0 20px; }
+    .filters .radio label {
+      margin-right: 10px; }
+    .filters .radio input {
+      width: 25px;
+      height: 25px; }
+  .filters .checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    .filters .checkboxes > div {
+      background-color: #414141;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center; }
+      .filters .checkboxes > div:hover {
+        box-shadow: 0 0 6px 5px #838282; }
+      .filters .checkboxes > div input {
+        width: 25px;
+        height: 25px; }
+      .filters .checkboxes > div label {
+        margin-right: 8px; }
+
+.movie-wrapper {
+  width: 900px;
+  height: 900px;
+  border: 3px solid black; }
+</style></head>
+  <body>
+    <div id="root"><main><div class="movie-wrapper"><h2>Joker</h2><p>Duration: 122 mins</p><img src="./Basic React Webpack Setup_files/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"><h4>Put on a happy face</h4><p>Overview: During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.</p><h4>Rating: 8.7 (1878 votes)</h4><p>Language(s):</p><p>English</p><button>Crime</button><button>Thriller</button><button>Drama</button></div></main></div>
+  <script type="text/javascript" src="./Basic React Webpack Setup_files/bundle.js"></script>
+
+</body></html>
