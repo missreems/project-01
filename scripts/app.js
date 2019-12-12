@@ -6,18 +6,9 @@ let playerIdx = 95
 let playerBullet = playerIdx - width
 
 let jellies1 = [4, 13, 15, 22, 26, 31, 37, 40, 48]
-// let jellies2 = [1, 12, 3]
-// let firstWave = false
+
 let jellies2Moving
 let jellies1Moving
-// let result = document.querySelector('.result')
-
-
-
-
-
-
-
 
 
 // LOAD DOM------------------------------------------------------------
@@ -41,7 +32,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const loseReset = document.querySelector('.loseReset')
   loseReset.classList.add('hide')
 
-
   function handleUserInput(keyCode) {
     switch (keyCode) {
       case 37: if (playerIdx % width > 0) playerIdx -= 1
@@ -53,6 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
   // WELCOME PAGE ------------------------------------------------------------
   start.addEventListener('click', () => {
     console.log('hello start')
@@ -62,8 +53,8 @@ window.addEventListener('DOMContentLoaded', () => {
     welcomePage.style.display = 'none'
     grid.classList.remove('hide')
   })
-  // after loading, a couple of minutes later the lose page comes up!!!
   
+
   // WINNING CONDITION ------------------------------------------------------------
   function win() {
     if (!jellies1.length) {
@@ -76,6 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
   // LOSING CONDITION ------------------------------------------------------------
   function lose() {
     // console.log('you lose!')
@@ -86,6 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
     loseReset.classList.add('.loseReset')
     
   }
+
 
   // RESET BUTTON ------------------------------------------------------------
   resetButtons.forEach(button => {
@@ -101,6 +94,7 @@ window.addEventListener('DOMContentLoaded', () => {
     grid.appendChild(cell)
     cells.push(cell)
   }
+
 
   // EVENTLISTENER FOR MOVEMENT OF PLAYER------------------------------------------------------------
   cells[playerIdx].classList.add('player')
@@ -137,20 +131,12 @@ window.addEventListener('DOMContentLoaded', () => {
     playerBullet = playerIdx - width
   }
 
+  
   // JELLIES 1 MOVEMENT PATTERN------------------------------------------------------------
-  // function checkFour (jelly) {
-  //   if (!firstWave && jelly === 50) {
-  //     moveSecondWave()
-  //     firstWave = true
-  //   }
-  // }
   function jelliesStartMoving () {
     jellies1Moving = setInterval(() => {
       cells.forEach(cell => cell.classList.remove('jelly'))
       jellies1.forEach((jelly) => {
-        // if (i === 4) {
-        //   checkFour(jelly)
-        // }
         console.log(jelly)
         if (jelly >= 81) {
           clearInterval(jellies1Moving)
@@ -171,30 +157,4 @@ window.addEventListener('DOMContentLoaded', () => {
       })
     }, 350)
   }
-  
-
-
-  // JELLIES 2 MOVEMENT PATTERN------------------------------------------------------------
-  // function moveSecondWave() {
-  //   cells.forEach(cell => cell.classList.remove('jelly'))
-  //   jellies2Moving = setInterval(() => {
-  //     jellies2.forEach((jelly) => {
-  //       if (jelly >= 81) {
-  //         clearInterval(jellies1Moving)
-  //         clearInterval(jellies2Moving)
-  //         console.log('you lose!')
-  //         // result.textContent = 'YOU LOSE!'
-  //         cells.forEach(cell => cell.classList.remove('jelly'))
-  //         cells[playerIdx].classList.remove('player') 
-  //       }
-  //       if (jelly) {
-  //         cells[jelly].classList.add('jelly')
-  //       }
-  //     })
-  //     jellies2 = jellies2.map(jelly => {
-  //       if (!jelly) return null
-  //       return jelly + 1
-  //     })
-  //   }, 500)
-  // }
 })
