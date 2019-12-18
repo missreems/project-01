@@ -67,7 +67,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
   // LOSING CONDITION ------------------------------------------------------------
   function lose() {
     // console.log('you lose!')

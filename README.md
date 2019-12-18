@@ -58,7 +58,30 @@ The player's sprite is at the bottom of the grid, it is allowed to move left and
 
 After every bullet is shot by the player, the game checks for a 'win' by verifying if any jellies are left. If the result 'false' is returned from the length of the array of jellies, the player wins. The winning condition checks for the length of the jellies1 array, if there are no jellies in the array then the player wins!
 
-![Winning & Losing Functions](screenshots/winning-and-losing-functions.png =420x500)
+```
+ // WINNING CONDITION
+  function win() {
+    if (!jellies1.length) {
+      // console.log('you win!')
+      grid.classList.replace('grid', 'hide')
+      winningText.classList.remove('hide')
+      winningText.classList.add('.winning-text')
+      winReset.classList.remove('hide')
+      winReset.classList.add('.winReset')
+    }
+  }
+
+  // LOSING CONDITION
+  function lose() {
+    // console.log('you lose!')
+    grid.classList.replace('grid', 'hide')
+    losingText.classList.remove('hide')
+    losingText.classList.add('.losing-text')
+    loseReset.classList.remove('hide')
+    loseReset.classList.add('.loseReset')
+    
+  }
+```
 
 ![Winning Page](screenshots/winning-page.png)
 
@@ -85,7 +108,32 @@ The main challenge of this project was creating the game logic for each feature.
 
 One of the challenges I faced when building my code was the movement functionality of the jellies. Setting and clearing the interval was a big hurdle for me.
 
-![Movement Pattern for Jellies 1](screenshots/jellies-movement-patterns.png =480x500)
+```
+function jelliesStartMoving () {
+    jellies1Moving = setInterval(() => {
+      cells.forEach(cell => cell.classList.remove('jelly'))
+      jellies1.forEach((jelly) => {
+        console.log(jelly)
+        if (jelly >= 81) {
+          clearInterval(jellies1Moving)
+          clearInterval(jellies2Moving)
+          lose()
+          console.log('you lose')
+          cells.forEach(cell => cell.classList.remove('jelly'))
+          cells[playerIdx].classList.remove('player')
+        }
+        if (jelly) {
+          cells[jelly].classList.add('jelly')
+        }
+      })
+      jellies1 = jellies1.map(jelly => {
+        if (!jelly) return null
+        return jelly + 1
+        
+      })
+    }, 350)
+  }
+```
 
 Improvements I would make are refactoring my key functions so the game works smoothly, giving jellies the functionality to shoot and adding an additional condition for losing the game.
 
